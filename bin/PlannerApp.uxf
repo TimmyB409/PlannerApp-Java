@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>480</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;multiple&gt;&gt;
+_Task_
+--
+-dueDate: LocalDate
+-completed: boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>416</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>88</x>
+      <y>304</y>
+      <w>272</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>_TaskList_
+--
+-tasks: ArrayList&lt;Task&gt; 
+--
+#organizeTasks(tasks: ArrayList&lt;Task&gt;): void
+(organizes the tasks field of the TaskList)
+#completeTask(task: Task): void 
+(sets the completed field to true on task, removes
+task from tasks field)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>376</x>
+      <y>184</y>
+      <w>208</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;110.0;240.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>304</y>
+      <w>328</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>_View_
+--
+-jFrame: JFrame
+--
+#drawFrame(): void
+(draws the JFrame)
+#drawTaskList(taskList: TaskList, parent: JComponent): void
+(draws taskList Panel in parent in the Gui) 
+#drawTask(task: Task, parent: JComponent): void
+(draws task Panel in parent in the Gui)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>80</y>
+      <w>192</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>_Controller_
+--
+-view: View
+-taskList: TaskList
+--
+#main(): void
+(handles the logic of the program)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>184</y>
+      <w>184</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;180.0;110.0;10.0;150.0</additional_attributes>
+  </element>
+</diagram>
