@@ -1,0 +1,2 @@
+12/9/2023 - just started work on this iteration of this project. This project really stands on the shoulders of all the many half-finished projects that came before it. Excited to bring this project into fruition. 
+12/10/2023 - I plan to have the basic model fixed by the end of the night, from there making the GUI pretty is the next priority. after that I'll need to consider moving this whole project to Android studio. A random thought: even if though you don't feel like doing something, nothing is stopping you from getting it done
