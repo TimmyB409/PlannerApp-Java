@@ -75,50 +75,68 @@ public class View {
 	 * @param Task task
 	 * @param JPanel panel
 	 */
-	public void drawTask(String task, JPanel panel) {
+	public void drawTask(String taskData, JPanel panel) {
 		
-		JPanel taskPanel = new JPanel();
+		TaskPanel taskPanel = new TaskPanel(taskData);
 		taskPanel.setSize(800, 200);
 		taskPanel.setBackground(Color.LIGHT_GRAY);
-		taskPanel.add(new JLabel("Due Date: " + task));
-		taskPanel.add(new JButton("CompleteTask"));
+		taskPanel.add(new JLabel("Due Date: " + taskPanel.dueDate));
+		taskPanel.add(new TaskButton("CompleteTask", taskPanel.index));
 		panel.add(taskPanel);
 		
-	}
-	/**
-	 * Purpose: removes a task panel from the panel
-	 * @return void
-	 * @param JPanel taskPanel
-	 */
-	public void removeTask(JPanel taskPanel) {
-		panel.remove(taskPanel);
 	}
 	
 	
 	//Internal Classes
+	/**
+	 * Responsibilities of class: hold information about the panel the button
+	 */
 	private class TaskButton extends JButton{
 		
 		//fields
-		private JPanel panel;
+		private String index;
 		
 		//constructors
-		public TaskButton(JPanel panel) {
-			for(int i; i < panel.getComponents().length(); i++) {
-				
-			}
-			this.panel = panel;
+		public TaskButton(String label, String index) {
+			super(label);
+			this.index = index;
+			this.addActionListener(new CompleteTaskListener());
 		}
 	}
 	
+	/**
+	 * Responsibilities of class: listen for a complete task button click
+	 */
 	private class CompleteTaskListener implements ActionListener {
-
+		
+		/**
+		 * Purpose: completes a task when a complete task button is clicked
+		 * @return void
+		 * @param ActionEvent: e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			TaskButton button = (TaskButton)e.getSource();
-			controller.completeTask(panel.getComponents());
-			removeTask(panel);
+			controller.completeTask(Integer.parseInt(button.index));
 		}
 		
 	}
+	
+	/**
+	 * Responsibilities of class: hold information about a task
+	 */
+	private class TaskPanel extends JPanel{
+		
+		//fields
+		private String index;
+		private String dueDate;
+		
+		//constructors
+		public TaskPanel(String taskData) {
+			this.dueDate = taskData.split("`")[0];
+			this.index = taskData.split("`")[1];
+		}
+	}
+	
 	
 }

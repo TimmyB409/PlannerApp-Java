@@ -1,6 +1,6 @@
 
-import java.awt.event.*;
-import java.time.LocalDate;
+import java.io.*;
+import java.time.*;
 import java.util.*;
 
 /**
@@ -27,6 +27,7 @@ public class Controller {
 	//Fields
 	private static TaskList taskList;
 	private static View view;
+	private static File data;
 	
 	/*Temporary*/
 	private static ArrayList<Task> tasks = new ArrayList<Task>();
@@ -37,6 +38,7 @@ public class Controller {
 		for(int i = 0; i<10; i++) tasks.add(new Task(LocalDate.now()));
 		this.taskList = new TaskList(tasks);
 		this.view = new View(this);
+		this.data = new File("src/PlannerAppData");
 	}
 	
 	//Methods
@@ -44,15 +46,29 @@ public class Controller {
 		
 		Controller app = new Controller();
 		
+		//draws the GUI
 		app.view.drawFrame();
-		app.view.drawTaskList(taskList.getTaskDates());
+		app.view.drawTaskList(taskList.getTasks());
 		
 	}
+	
 	/**
-	 * Purpose: completes and deletes a task in the task list
+	 * Purpose: completes and deletes a task from the task list then repaints the GUI
 	 * @return void
-	 * @param int taskIndex
+	 * @param int: taskIndex
 	 */
+	public static void completeTask(int taskIndex) {
+		
+		taskList.completeTask(taskIndex);
+		repaintGUI();
+		
+	}
+	
+	public static void repaintGUI() {
+		
+		view.drawTaskList(taskList.getTasks());
+		
+	}
 	
 	
 }

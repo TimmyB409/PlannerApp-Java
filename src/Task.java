@@ -38,19 +38,30 @@ public class Task {
 	}
 	
 	//Methods
-	/**
-	 * Purpose: returns the due date
-	 * @return LocalDate: dueDate
-	 */
-	public LocalDate getDueDate() {
-		return dueDate;
-	}
+	
 	/**
 	 * Purpose: sets the completed field of the task to true
 	 * @return void
 	 */
 	public void setCompleted() {
 		this.completed = true;
+	}
+	
+	/**
+	 * Purpose: returns the due date 
+	 * @return LocalDate: dueDate
+	 */
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+	
+	/**
+	 * Purpose: returns the task in string format
+	 * @return String: task
+	 */
+	@Override
+	public String toString() {
+		return dueDate.toString();
 	}
 	
 }

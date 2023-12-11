@@ -38,14 +38,19 @@ public class TaskList {
 	
 	//Methods
 	/**
-	 * Purpose: returns an array of the task due dates
-	 * @return String[] taskDates
+	 * Purpose: returns an array of the tasks in string format
+	 * @return String[] tasks
 	 */
-	public String[] getTaskDates() {
-		String[] dates = new String[tasks.size()];
-		for(int i = 0; i < tasks.size(); i++) dates[i] = tasks.get(i).getDueDate().toString();
-		return dates;
+	public String[] getTasks() {
+		String[] taskStrings = new String[tasks.size()];
+		String taskString = "";
+		for(int i = 0; i < tasks.size(); i++) {
+			taskString = tasks.get(i).toString() + "`" + i;
+ 			taskStrings[i] = taskString;
+		}
+		return taskStrings;
 	}
+	
 	/**
 	 * Purpose: sorts the tasks by due date
 	 * @return void
@@ -77,14 +82,16 @@ public class TaskList {
 		
 		return merged;
 	}
+	
 	/**
 	 * Purpose: marks a task as completed and removes it from the list
 	 * @return void
 	 * @param Task
 	 */
-	public void completeTask(Task task) {
+	public void completeTask(int taskIndex) {
+		Task task = tasks.get(taskIndex);
 		task.setCompleted();
-		tasks.remove(tasks.get(tasks.indexOf(task))); //removes the task from the list of tasks
+		tasks.remove(task); //removes the task from the list of tasks
 	}
 	
 }
