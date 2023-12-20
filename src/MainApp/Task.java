@@ -1,5 +1,7 @@
+package MainApp;
 
 import java.time.*;
+import MainApp.Controller.*;
 
 
 /**
@@ -25,6 +27,7 @@ import java.time.*;
 public class Task {
 	
 	//Fields
+	private String description;
 	private LocalDate dueDate;
 	private boolean completed;
 	
@@ -33,8 +36,18 @@ public class Task {
 	 * Purpose: construct a task 
 	 * @return nothing
 	 */
-	public Task(LocalDate dueDate) {
+	public Task(String description, LocalDate dueDate) {
+		this.description = description;
 		if(dueDate != null) this.dueDate = dueDate;
+	}
+	
+	/**
+	 * Purpose: construct a task using a TaskData instance
+	 * @return nothing
+	 */
+	public Task(TaskData taskData) {
+		this.description = taskData.description();
+		this.dueDate = LocalDate.parse(taskData.dueDate());
 	}
 	
 	//Methods
@@ -53,6 +66,22 @@ public class Task {
 	 */
 	public LocalDate getDueDate() {
 		return dueDate;
+	}
+	
+	/**
+	 * Purpose: returns the due date as a string
+	 * @return String: dueDate
+	 */
+	public String getDueDate(Boolean string) {
+		return dueDate.toString();
+	}
+	
+	/**
+	 * Purpose: returns the description 
+	 * @return String: description
+	 */
+	public String getDescription() {
+		return description;
 	}
 	
 	/**

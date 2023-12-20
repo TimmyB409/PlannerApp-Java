@@ -1,6 +1,8 @@
+package MainApp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import MainApp.Controller.*;
 
 /**
  * Lead Author(s):
@@ -41,14 +43,16 @@ public class TaskList {
 	 * Purpose: returns an array of the tasks in string format
 	 * @return String[] tasks
 	 */
-	public String[] getTasks() {
-		String[] taskStrings = new String[tasks.size()];
-		String taskString = "";
+	public TaskData[] getTasks() {
+		TaskData[] taskDatas = new TaskData[tasks.size()];
 		for(int i = 0; i < tasks.size(); i++) {
-			taskString = tasks.get(i).toString() + "`" + i;
- 			taskStrings[i] = taskString;
+			TaskData taskData = new TaskData(
+					Integer.toString(i), 
+					tasks.get(i).getDescription(), 
+					tasks.get(i).getDueDate(true));
+ 			taskDatas[i] = taskData;
 		}
-		return taskStrings;
+		return taskDatas;
 	}
 	
 	/**
@@ -66,8 +70,8 @@ public class TaskList {
 		int firstCounter = 0;
 		int secondCounter = 0;
 		while(firstCounter < firstHalf.size() || secondCounter < secondHalf.size()) { // sorts and merges first and second halves
-			Task first = new Task(LocalDate.MAX);
-			Task second = new Task(LocalDate.MAX);
+			Task first = new Task(null, LocalDate.MAX);
+			Task second = new Task(null, LocalDate.MAX);
 			if(firstCounter < firstHalf.size()) first = firstHalf.get(firstCounter);
 			if(secondCounter < secondHalf.size()) second = secondHalf.get(secondCounter);
 			if(first.getDueDate().isBefore(second.getDueDate())) {
@@ -86,12 +90,23 @@ public class TaskList {
 	/**
 	 * Purpose: marks a task as completed and removes it from the list
 	 * @return void
-	 * @param Task
+	 * @param int taskIndex
 	 */
 	public void completeTask(int taskIndex) {
 		Task task = tasks.get(taskIndex);
 		task.setCompleted();
 		tasks.remove(task); //removes the task from the list of tasks
+	}
+	
+	/**
+	 * Purpose: saves updates to the specified task 
+	 * @return void
+	 * @param 
+	 */
+	public void saveTask(TaskData taskData) {
+		int index = Integer.parseInt(taskData.index());
+		Task task = new Task(taskData);
+		tasks.set(index, task);
 	}
 	
 }

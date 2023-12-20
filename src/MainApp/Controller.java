@@ -1,3 +1,4 @@
+package MainApp;
 
 import java.io.*;
 import java.time.*;
@@ -35,7 +36,7 @@ public class Controller {
 	
 	//Constructors
 	public Controller() {
-		for(int i = 0; i<10; i++) tasks.add(new Task(LocalDate.now()));
+		for(int i = 0; i<10; i++) tasks.add(new Task("Default", LocalDate.now()));
 		this.taskList = new TaskList(tasks);
 		this.view = new View(this);
 		this.data = new File("src/PlannerAppData");
@@ -64,11 +65,32 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Purpose: saves changes from the view to the tasklist and repaints the GUI
+	 * @return void
+	 * @param int: taskIndex
+	 */
+	public static void saveTask(TaskData taskData) {
+		
+		taskList.saveTask(taskData);
+		repaintGUI();
+		
+	}
+	
+	/**
+	 * Purpose: redraws the updated GUI 
+	 * @return void
+	 */
 	public static void repaintGUI() {
 		
 		view.drawTaskList(taskList.getTasks());
 		
 	}
 	
+	//Internal Classes
+	/**
+	 * Responsibilities of class: transfers data about tasks to and from the view and the model
+	 */
+	public record TaskData (String index, String description, String dueDate) {};
 	
 }
